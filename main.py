@@ -52,6 +52,8 @@ pygame.font.init()
 # Window dimensions.
 width = 640
 height = 640
+width = 900
+height = 900
 hud_height = 100
 
 
@@ -88,7 +90,7 @@ pygame.mouse.set_visible(False)
 globalz = Globalz(num_players,
                   joystick_count, 
                   screen, 
-                  width, height-hud_height, 
+                  width, height,
                   hud_height,
                   BG_COLOR, FOOD_COLOR, ENEMY_COLOR, OBSTACLE_COLOR, WORM_COLORS,
                   friendly_crash=False,
@@ -180,6 +182,9 @@ def run_game(g, level_filenm):
                 elif event.key == pygame.K_r:
                     running = False
                     restart = True
+                elif event.key == pygame.K_n:
+                    restart = "next"
+                    running = False
                 status = player.keyboard_event(event, tb)
                 if status == "killed":
                     restart = True

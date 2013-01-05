@@ -23,6 +23,9 @@ class Player:
 
 
     def keyboard_event(self, event, tb):
+        if event.key == pygame.K_EQUALS:
+            tb.dump()
+
         new_player_loc = move_loc(event.key, self.tile_loc)
         if new_player_loc is None:
             # No move was input.
@@ -35,7 +38,7 @@ class Player:
         if cell in self.legal_player_move_tiles and cell2 in self.legal_player_move_tiles: # and cell2 not in (_)
             # Make a normal player move.
             self.player_move(new_player_loc)
-        elif cell == "c":
+        elif cell == "c" and cell2 in self.legal_player_move_tiles:
             # Attempt a crate push move.
             new_crate_loc = move_loc(event.key, new_player_loc)
             self.crate_move(new_player_loc, new_crate_loc, tb)

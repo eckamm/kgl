@@ -2,12 +2,37 @@ import os
 import sys
 import json
 import pygame
-from copy import deepcopy
+
+"""
+    "p": "Character.png",
+        the player
+            moves around
+            can push crates
+            can fall in holes
+            is blocked by I=ForcePlayer
+
+    "f": "WoodFloor.png",
+    "g": "GrassFloor.png",
+    "w": "WoodWall.png",
+    "s": "StoneFloor.png",
+        these "wall" tiles block all movement
+
+    "G": "GoalTile.png",
+        when player reaches any goal tile, the level is won
+
+    "c": "Crate.png",
+        player can push, but not into i=ForceBox or a "wall" tile
+
+    "i": "ForceBox.png",
+        only blocks movement of box
+
+    "I": "ForcePlayer.png",
+        only blocks movement of player
+}"""
 
 
 class TileBoard:
     legal_crate_move_tiles = (" ","I")
-
 
     bg_color = (0, 0, 0)
 
@@ -22,20 +47,23 @@ class TileBoard:
         w, h = self.g.width, self.g.height
         self.tile_width = (w - self.bx * 2) // self.grid_width
         self.tile_height = self.tile_width
+        self.layer_offset = int(self.tile_height // 2)
+        self.player_width = int(self.tile_width // 2)
+        print w,h
+        print self.tile_width, self.tile_height
+        print self.layer_offset
 
-    def __init__(self, g, bx, by, filenm=None):
+
+    def __init__(self, g, bx, by, filenm):
         self.g = g
         self.bx, self.by = bx, by
 
-        if filenm is None:
-            self._mk_default_data()
-        else:
-            self._load_data(filenm)
+        self._load_data(filenm)
 
         self.grid_width = len(self.data[0][0])
         self.grid_height = len(self.data[0])
 
-        #self._init_constants()
+        self._init_constants()
 
         self.tiles = {}
         for k in self.g.images:
@@ -54,42 +82,10 @@ class TileBoard:
             jdat = json.load(fp)
             self.level_name = jdat["name"]
             self.data = jdat["level"]
-            self.permdata = deepcopy(self.data)
+            self._mk_permdata()
             self.start = jdat["start"]
 
     
-    def _mk_default_data(self):
-        self.data = [
-            [
-            "gggggggggggggggggg",
-            "gggggggggggggggggg",
-            "gffffffffffffffffg",
-            "gf ffffffffffffffg",
-            "gffffffffffffffffg",
-            "gffffffffffffffffg",
-            "gffffffffffffffffg",
-            "gffffffffffffffffg",
-            "gffffffffffffffffg",
-            "gggggggggggggggggg",
-            "gggggggggggggggggg",
-            ],
-            [
-            "                  ",
-            "                  ",
-            " ssssssssssss sss ",
-            " s       x      s ",
-            " s       x      s ",
-            " s       x      s ",
-            " s              s ",
-            " s              s ",
-            " sss ssssssssssss ",
-            "                  ",
-            "                  ",
-            ],
-        ][:2]
-
-
-
     def xform_coord(self, tx, ty, tz):
         x = self.bx + tx * self.tile_width
         y = self.by + ty * self.tile_height - tz * self.layer_offset
@@ -163,4 +159,28 @@ class TileBoard:
                 data[-1][-1] = "".join(data[-1][-1]) # stringify
         self.data = data
     
+    def dump(self):
+        for layer in self.data:
+            for row in layer:
+                print row
+            print "---"
+        print "-------"
+        for layer in self.permdata:
+            for row in layer:
+                print row
+            print "---"
+ 
 
+    def _mk_permdata(self):
+        data = []
+        for tz, layer in enumerate(self.data):
+            data.append([]) # start a layer
+            for ty, row in enumerate(layer):
+                data[-1].append([]) # start a row
+                for tx, cell in enumerate(row):
+                    if cell == "c":
+                        cell = " "
+                    data[-1][-1].append(cell) # add each column
+                data[-1][-1] = "".join(data[-1][-1]) # stringify
+        self.permdata = data
+ 
