@@ -1,0 +1,36 @@
+{
+    "name":"The KEWL Test Level, Part I"
+    ,
+    "level":[[
+    "gggggggggggggg",
+    "ggIggggggggggg",
+    "gggggggggggggg",
+    "gggggggggggggg",
+    "gggggggggggggg",
+    "gggggggggggggg",
+    "gggggggggggggg",
+    "gggggggggggggg",
+    "gggggggggggggg",
+    "gggggggggggggg",
+    "ggiggggggggggg",
+    "gggggggggggggg"
+    ]
+    ,
+    [
+    "              ",
+    " c        cI  ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    " c        ci  ",
+    "              "
+    ]
+    ]
+    ,
+    "start":[0,5]
+}
