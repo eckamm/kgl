@@ -42,16 +42,20 @@ class TileBoard:
 
     player_width = tile_width // 2
     player_height = (tile_height * 4) // 3
+    player_offset = -int(tile_height // 2)
 
     def _init_constants(self):
         w, h = self.g.width, self.g.height
         self.tile_width = (w - self.bx * 2) // self.grid_width
         self.tile_height = self.tile_width
         self.layer_offset = int(self.tile_height // 2)
-        self.player_width = int(self.tile_width // 2)
         print w,h
         print self.tile_width, self.tile_height
         print self.layer_offset
+        self.player_width = int(self.tile_width // 2)
+        self.player_height = int((self.tile_height * 4) // 3)
+	self.player_offset = -int(self.player_height // 3)
+
 
 
     def __init__(self, g, bx, by, filenm):
@@ -111,6 +115,7 @@ class TileBoard:
                     if (tx, ty, tz) == ploc:
                         tile = self.tiles.get("p")
                         px = x + self.tile_width // 4
+			py = y + self.player_offset
                         self.g.surface.blit(tile, (px, y))
                     # Draw the (transparent) tile over the player.
                     tile = self.tiles.get(cell)

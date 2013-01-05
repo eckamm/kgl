@@ -166,7 +166,7 @@ def run_game(g, level_filenm):
     start = (tb.start[0], tb.start[1], 1)
     player = Player(start)
 
-    tick = 40
+    tick = 20
     restart = False
     running = True
     while running:
