@@ -1,40 +1,44 @@
 {
-    "name":"The Beginning"
+    "name":"Build a Bridge Workshop"
     ,
     "level":[[
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              "
+    "             ",
+    "   sssssss   ",
+    "   sssssss   ",
+    "   sssssss   ",
+    "   sssssss   ",
+    "   sssssss   ",
+    "             ",
+    "             ",
+    "             ",
+    "             ",
+    "   sssssss   ",
+    "   sssssss   ",
+    "   sssgsss   ",
+    "   sssssss   ",
+    "   sssssss   ",
+    "             "
     ]
     ,
     [
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              ",
-    "              "
+    "  iiiiiiiii  ",
+    "  i       i  ",
+    "  i c   c i  ",
+    "  i       i  ",
+    "  i c   c i  ",
+    "  i       i  ",
+    "  iiii iiii  ",
+    "             ",
+    "             ",
+    "  iiii iiii  ",
+    "  i       i  ",
+    "  i       i  ",
+    "  i       i  ",
+    "  i       i  ",
+    "  i       i  ",
+    "  iiiiiiiii  "
     ]
     ]
     ,
-    "start":[0,0]
+    "start":[6,2]
 }
