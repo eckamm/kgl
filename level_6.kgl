@@ -2,37 +2,37 @@
     "name":"The Fuuuuuuture, Pt.1"
     ,
     "level":[[
-    "WWWWWWWWWWWWWW",
-    "W            W",
-    "W WWW        W",
-    "W WWW        W",
-    "W WWW        W",
-    "W i   WWWG   W",
-    "WWWWW        W",
-    "WWWWW        W",
-    "WWWWW        W",
-    "W            W",
-    "W            W",
-    "W            W",
-    "W            W",
-    "WWWWWWWWWWWWWW"
-    ]
-    ,
-    [
     "FFFFFFFFFFFFFF",
     "F            F",
-    "F            F",
-    "F            F",
-    "F  c         F",
-    "F            F",
-    "F            F",
-    "F c c        F",
-    "F            F",
+    "F FFF        F",
+    "F FFF        F",
+    "F FFF        F",
+    "F i   FFFG   F",
+    "FFFFF        F",
+    "FFFFF        F",
+    "FFFFF        F",
     "F            F",
     "F            F",
     "F            F",
     "F            F",
     "FFFFFFFFFFFFFF"
+    ]
+    ,
+    [
+    "WWWWWWWWWWWWWW",
+    "W            W",
+    "W            W",
+    "W            W",
+    "W  c         W",
+    "W            W",
+    "W            W",
+    "W c c        W",
+    "W            W",
+    "W            W",
+    "W            W",
+    "W            W",
+    "W            W",
+    "WWWWWWWWWWWWWW"
     ]
     ]
     ,

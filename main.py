@@ -97,8 +97,8 @@ tile_filenm_map = {
     "c": "Crate.png",
     "p": "Character.png",
     "I": "ForcePlayer.png",
-    "W": "FutureFloor.png",
-    "F": "FutureWall.png",
+    "F": "FutureFloor.png",
+    "W": "FutureWall.png",
 }
 for x, filenm in tile_filenm_map.items():
     globalz.images[x] = pygame.image.load(filenm)
