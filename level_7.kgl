@@ -1,0 +1,40 @@
+{
+    "name":"The Fuuuuuture, Pt.2"
+    ,
+    "level":[[
+    "ssssssssssssss",
+    "sFFFFFFFFFFFIs",
+    "sFFFFFFFFFFF s",
+    "sFFFFFFFFFFFIs",
+    "sFFFFFFFFFFF s",
+    "sFFFFFFFFFFFFF",
+    "sFFFFFFFFFFFIF",
+    "sFFFFFFFFFFFIs",
+    "sFFFFFFFFFFF s",
+    "sFFFFFFFFFFFIs",
+    "sFFFFFFFFFFFIs",
+    "sFFFFFFFFFFF s",
+    "sFFFFFFFFFFFGs",
+    "ssssssssssssss"
+    ]
+    ,
+    [
+    "WWWWWWWWWWWWWW",
+    "W            W",
+    "W  c  c   c  W",
+    "WiiiiiiiiiiW W",
+    "W          c W",
+    "W             ",
+    "WWWW WWWWWWW  ",
+    "WWWW WWWWWWW W",
+    "W          c W",
+    "W          W W",
+    "W          W W",
+    "W            W",
+    "W          W W",
+    "WWWWWWWWWWWWWW"
+    ]
+    ]
+    ,
+    "start":[1,1]
+}
