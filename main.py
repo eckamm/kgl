@@ -69,8 +69,8 @@ class Globalz:
         self.scores = {}
 
 
-#screen = pygame.display.set_mode((width, height), pygame.FULLSCREEN)
-screen = pygame.display.set_mode((width, height))
+screen = pygame.display.set_mode((width, height), pygame.FULLSCREEN)
+#screen = pygame.display.set_mode((width, height))
 pygame.mouse.set_visible(False)
 
 
