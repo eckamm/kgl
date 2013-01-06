@@ -90,6 +90,7 @@ class TileBoard:
             self.data = jdat["level"]
             self._mk_permdata()
             self.start = jdat["start"]
+        assert len(self.data[0]) == len(self.data[1])
 
     
     def xform_coord(self, tx, ty, tz):
@@ -191,3 +192,5 @@ class TileBoard:
                 data[-1][-1] = "".join(data[-1][-1]) # stringify
         self.permdata = data
  
+
+

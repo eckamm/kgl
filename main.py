@@ -7,6 +7,7 @@ import glob
 
 from tileboard import TileBoard
 from player import Player
+from leveltitle import LevelTitle
 
 
 
@@ -52,8 +53,8 @@ pygame.font.init()
 # Window dimensions.
 width = 640
 height = 640
-width = 900
-height = 900
+width = 760
+height = 760
 hud_height = 100
 
 
@@ -130,9 +131,51 @@ class TestSprite(pygame.sprite.Sprite):
         self.g.surface.blit(self.image, self.rect)
 
 
+def level_title_intro(tb, player, clock):
+    """
+    returns (running, restart)
+
+    Returns the "running" flag to pass along whether 
+    the user quit while the title was being shown.
+
+    Returns the "restart" flag to pass along whether
+    the user pressed "next" while the title was
+    being shown.
+    """
+    running = True
+    restart = False
+    start_time = time.time()
+    tick = 20
+
+    tb.draw(player.tile_loc)
+
+    lt = LevelTitle(tb.g)
+    lt.draw(tb.level_name)
+
+    pygame.display.flip()
+    while running:
+        elapsed = time.time() - start_time
+        if elapsed > 2.5:   
+            break
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                restart = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    running = False
+                    restart = False
+                elif event.key == pygame.K_n:
+                    restart = "next"
+                    running = False
+        clock.tick(tick)
+    print "*" * 64
+    return running, restart
+
+
 
 def run_game(g, level_filenm):
-    g.surface.fill(g.bg_color)
+#   g.surface.fill(g.bg_color)
     pygame.display.flip()
 
 #   pgroup = pygame.sprite.GroupSingle()
@@ -167,8 +210,9 @@ def run_game(g, level_filenm):
     player = Player(start)
 
     tick = 20
-    restart = False
-    running = True
+
+    running, restart = level_title_intro(tb, player, clock)
+
     while running:
 
         for event in pygame.event.get():
