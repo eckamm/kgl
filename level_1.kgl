@@ -1,24 +1,25 @@
 {
-    "name":"The KEWL Test Level, Part I"
+    "name":"The Beginning"
     ,
     "level":[[
+    "ssssssssssssss",
     "gggggggggggggg",
-    "ggIggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "ggiggggggggggg",
-    "gggggggggggggg"
+    "gsffffffssfffg",
+    "gsfffffsfffffg",
+    "gsfffssffffffg",
+    "gsffsffffffffg",
+    "gsssfffffffffg",
+    "gsssfffffffffg",
+    "gsffsffffffffg",
+    "gsfffssffffffg",
+    "gsfffffsfffffg",
+    "gsffffffssfffg",
+    "gggggggggggggG",
+    "ssssssssssssss"
     ]
     ,
     [
     "              ",
-    " c        cI  ",
     "              ",
     "              ",
     "              ",
@@ -27,10 +28,13 @@
     "              ",
     "              ",
     "              ",
-    " c        ci  ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
     "              "
     ]
     ]
     ,
-    "start":[0,5]
+    "start":[0,0]
 }
