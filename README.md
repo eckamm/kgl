@@ -1,8 +1,7 @@
 README
 ===
-Hello
--insert comments here-
-other changes
-GITHUB
-TEST
-2 at once
+This is a readme.
+-
+This is a game.
+-
+Push boxes, go through force fields, and get to the goal!
