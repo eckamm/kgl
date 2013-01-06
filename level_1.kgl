@@ -1,36 +1,40 @@
 {
-    "name":"The Abandoned City, Pt.1"
+    "name":"The Abandoned City Pt.1"
     ,
     "level":[[
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "gggggggggggggg",
-    "ggggggggggi gg",
-    "gggggggggg Ggg",
-    "gggggggggggggg",
-    "gggggggggggggg"
+    "ffffffff      ",
+    "ffffffff      ",
+    "fff  fff      ",
+    "ffffffff      ",
+    "ffffffff      ",
+    "ffffffff      ",
+    "fffiifff      ",
+    "ffffffff      ",
+    " ffffff       ",
+    "  ffff        ",
+    "  fi f        ",
+    "  ffff        ",
+    "  ffGf        ",
+    "  ffff        "
     ]
     ,
     [
-    "              ",
-    " wwwwwiiwwwww ",
-    " w          w ",
-    " w c        w ",
-    " w          w ",
-    " w    wwww  w ",
-    " w          w ",
-    " w     w    w ",
-    " w c   w    w ",
-    " w     w    w ",
-    " wwwwwwwwwwww ",
-    "            "
+    "wwwwwwww      ",
+    "w      w      ",
+    "w      w      ",
+    "w  cc  w      ",
+    "w      w      ",
+    "w  cc  w      ",
+    "w      w      ",
+    "w      w      ",
+    " w    w       ",
+    "  wccw        ",
+    "  w  w        ",
+    "  w  w        ",
+    "  w  w        ",
+    "  wwww        "
     ]
     ]
     ,
-    "start":[0,0]
+    "start":[1,1]
 }

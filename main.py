@@ -257,6 +257,7 @@ if __name__=="__main__":
     while 1:
         level_filenm = level_filenms[level_idx]
         restart = run_game(globalz, level_filenm)
+        globalz.surface.fill((0,0,0))
         if restart == "next":
             level_idx += 1
             if level_idx >= len(level_filenms):
