@@ -23,16 +23,6 @@ sound_dir = os.path.join(base_dir, "sounds")
 random.seed(0)
 
 BG_COLOR = (0, 55, 55)
-FOOD_COLOR = (255, 0, 0)
-OBSTACLE_COLOR = (0, 0, 0)
-ENEMY_COLOR = (250, 0, 0)
-WORM_COLORS = [
-    (0, 255, 0),
-    (255, 255, 255),
-    (255, 0, 255),
-    (0, 255, 255),
-]
-
 
 pygame.joystick.init()
 joystick_count = pygame.joystick.get_count()
@@ -64,7 +54,7 @@ class Globalz:
                  joystick_count, 
                  surface, 
                  width, height, hud_height,
-                 bg_color, food_color, enemy_color, obstacle_color, worm_colors,
+                 bg_color,
                  friendly_crash=False,
                  eat_sound=None):
         self.num_players = num_players
@@ -74,10 +64,6 @@ class Globalz:
         self.height = height
         self.hud_height = hud_height
         self.bg_color = bg_color
-        self.food_color = food_color
-        self.enemy_color = enemy_color
-        self.obstacle_color = obstacle_color
-        self.worm_colors = worm_colors
         self.friendly_crash = friendly_crash
         self.eat_sound = eat_sound
         self.scores = {}
@@ -93,7 +79,7 @@ globalz = Globalz(num_players,
                   screen, 
                   width, height,
                   hud_height,
-                  BG_COLOR, FOOD_COLOR, ENEMY_COLOR, OBSTACLE_COLOR, WORM_COLORS,
+                  BG_COLOR,
                   friendly_crash=False,
                   eat_sound=None)
 
@@ -117,90 +103,8 @@ for x, filenm in tile_filenm_map.items():
     globalz.images[x].convert()
 
 
-
-class TestSprite(pygame.sprite.Sprite):
-    def __init__(self, g, pos, size):
-        self.g = g
-        self.image = pygame.transform.scale(self.g.images["apple"], (size, size))
-        self.pos = pos
-        self.size = size
-        self.rect = pygame.rect.Rect(self.pos[0], self.pos[1], size, size)
-        pygame.sprite.Sprite.__init__(self)
-
-    def draw(self):
-        self.g.surface.blit(self.image, self.rect)
-
-
-def level_title_intro(tb, player, clock):
-    """
-    returns (running, restart)
-
-    Returns the "running" flag to pass along whether 
-    the user quit while the title was being shown.
-
-    Returns the "restart" flag to pass along whether
-    the user pressed "next" while the title was
-    being shown.
-    """
-    running = True
-    restart = False
-    start_time = time.time()
-    tick = 20
-
-    tb.draw(player.tile_loc)
-
-    lt = LevelTitle(tb.g)
-    lt.draw(tb.level_name)
-
-    pygame.display.flip()
-    while running:
-        elapsed = time.time() - start_time
-        if elapsed > 2.5:   
-            break
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-                restart = False
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    running = False
-                    restart = False
-                elif event.key == pygame.K_n:
-                    restart = "next"
-                    running = False
-        clock.tick(tick)
-    print "*" * 64
-    return running, restart
-
-
-
 def run_game(g, level_filenm):
-#   g.surface.fill(g.bg_color)
     pygame.display.flip()
-
-#   pgroup = pygame.sprite.GroupSingle()
-#   pgroup.add(TestSprite(g, (110, 300), 80))
-
-
-#   group = pygame.sprite.Group()
-#   for i in range(4):
-#       group.add(TestSprite(g, (i*100, i*100), 30*i))
-
-#   group.draw(g.surface)
-#   pgroup.clear(g.surface, g.bg_color)
-    #pgroup.draw(g.surface)
-#   pgroup.sprite.draw()
-
-#   for i in (120, 119, 118, 117, 116, 115):
-#       pgroup.sprite.rect = pygame.rect.Rect(pgroup.sprite.rect[0], 
-#                                             i,
-#                                             pgroup.sprite.rect[2], 
-#                                             pgroup.sprite.rect[3])
-#       print pgroup.sprite.rect[1], pygame.sprite.spritecollide(pgroup.sprite, group, False, pygame.sprite.collide_mask)
-#       #pgroup.draw(g.surface)
-#       pgroup.sprite.draw()
-#       time.sleep(.3)
-#       pygame.display.flip()
 
     clock = pygame.time.Clock()
 
@@ -211,9 +115,15 @@ def run_game(g, level_filenm):
 
     tick = 20
 
-    running, restart = level_title_intro(tb, player, clock)
+    running = True
+    restart = False
+    g.surface.fill((0,0,0))
+
+    lt = LevelTitle(tb.g)
+    start_time = time.time()
 
     while running:
+        g.surface.fill((0,0,0))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -240,6 +150,11 @@ def run_game(g, level_filenm):
             #print "++", event
 
         tb.draw(player.tile_loc)
+
+        elapsed = time.time() - start_time
+        if elapsed < 2.5:
+            lt.draw(tb.level_name)
+
         pygame.display.flip()
         clock.tick(tick)
 
