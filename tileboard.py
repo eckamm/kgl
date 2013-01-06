@@ -46,8 +46,13 @@ class TileBoard:
 
     def _init_constants(self):
         w, h = self.g.width, self.g.height
-        self.tile_width = (w - self.bx * 2) // self.grid_width
-        self.tile_height = self.tile_width
+        if self.grid_width > self.grid_height:
+            self.tile_width = (w - self.bx * 2) // self.grid_width
+            self.tile_height = self.tile_width
+        else:
+            self.tile_height = (h - self.by * 2) // self.grid_height
+            self.tile_width = self.tile_height
+
         self.layer_offset = int(self.tile_height // 2)
         print w,h
         print self.tile_width, self.tile_height
