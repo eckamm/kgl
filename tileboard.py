@@ -52,18 +52,17 @@ class TileBoard:
         else:
             self.tile_height = (h - self.by * 2) // self.grid_height
             self.tile_width = self.tile_height
-
         self.layer_offset = int(self.tile_height // 2)
-        print w,h
-        print self.tile_width, self.tile_height
-        print self.layer_offset
         self.player_width = int(self.tile_width // 2)
         self.player_height = int((self.tile_height * 4) // 3)
-        print self.player_width, self.player_height
-        print self.player_offset
 	self.player_offset = -int(self.player_height // 3)
 
-
+    def dump_constants(self):
+        print >>sys.stderr, "w=%s h=%s" % (self.g.width, self.g.height)
+        print >>sys.stderr, "tw=%s th=%s" % (self.tile_width, self.tile_height)
+        print >>sys.stderr, "lo=%s" % self.layer_offset
+        print >>sys.stderr, "pw=%s ph=%s" % (self.player_width, self.player_height)
+        print >>sys.stderr, "po=%s" % self.player_offset
 
     def __init__(self, g, bx, by, filenm):
         self.g = g
@@ -175,13 +174,13 @@ class TileBoard:
     def dump(self):
         for layer in self.data:
             for row in layer:
-                print row
-            print "---"
-        print "-------"
+                print >>sys.stderr, row
+            print >>sys.stderr, "---"
+        print >>sys.stderr, "-------"
         for layer in self.permdata:
             for row in layer:
-                print row
-            print "---"
+                print >>sys.stderr, row
+            print >>sys.stderr, "---"
  
 
     def _mk_permdata(self):

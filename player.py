@@ -24,6 +24,7 @@ class Player:
 
     def keyboard_event(self, event, tb):
         if event.key == pygame.K_EQUALS:
+            tb.dump_constants()
             tb.dump()
 
         new_player_loc = move_loc(event.key, self.tile_loc)

@@ -26,7 +26,7 @@ BG_COLOR = (0, 55, 55)
 
 pygame.joystick.init()
 joystick_count = pygame.joystick.get_count()
-print "joystick_count:", joystick_count
+print >>sys.stderr, "joystick_count:", joystick_count
 for joystick_id in range(joystick_count):
     joystick = pygame.joystick.Joystick(joystick_id)
     joystick.init()
@@ -100,7 +100,7 @@ tile_filenm_map = {
 }
 for x, filenm in tile_filenm_map.items():
     globalz.images[x] = pygame.image.load(filenm)
-    globalz.images[x].convert()
+    globalz.images[x] = globalz.images[x].convert_alpha()
 
 
 def run_game(g, level_filenm):
@@ -113,7 +113,7 @@ def run_game(g, level_filenm):
     start = (tb.start[0], tb.start[1], 1)
     player = Player(start)
 
-    tick = 20
+    tick = 30
 
     running = True
     restart = False
@@ -166,7 +166,8 @@ def run_game(g, level_filenm):
     return restart
 
 
-if __name__=="__main__":
+
+def main():
     level_filenms = sorted(glob.glob("level_*.kgl"))
     level_idx = 0
     while 1:
@@ -176,9 +177,18 @@ if __name__=="__main__":
         if restart == "next":
             level_idx += 1
             if level_idx >= len(level_filenms):
-                print "No more levels."
+                print >>sys.stderr, "No more levels."
                 break
         elif restart is False:
             break
     time.sleep(0.5)
+
+
+if __name__=="__main__":
+    import cProfile
+    import pstats
+    cProfile.run("main()", "profile.data")
+    p = pstats.Stats("profile.data")
+    p.strip_dirs().sort_stats('time').print_stats()
+#   main() 
 
