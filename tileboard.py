@@ -54,6 +54,8 @@ class TileBoard:
         print self.layer_offset
         self.player_width = int(self.tile_width // 2)
         self.player_height = int((self.tile_height * 4) // 3)
+        print self.player_width, self.player_height
+        print self.player_offset
 	self.player_offset = -int(self.player_height // 3)
 
 
