@@ -1,0 +1,40 @@
+{
+    "name":"Space Station"
+    ,
+    "level":[[
+    "IIIIIIIIIIIIII",
+    "I             ",
+    "III           ",
+    " Is I         ",
+    "    I         ",
+    "   isI        ",
+    "   i I        ",
+    "   isI        ",
+    "    s         ",
+    "    IIIII     ",
+    "     i  I     ",
+    "     i  I     ",
+    "     i  I     ",
+    "IIIIIIIIIIIIIG"
+    ]
+    ,
+    [
+    "              ",
+    "              ",
+    "              ",
+    "  c           ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    "              ",
+    "              "
+    ]
+    ]
+    ,
+    "start":[0,0]
+}
