@@ -36,4 +36,5 @@ nosetests.xml
 
 *~
 *.swp
-*.data
+
+profile.data
