@@ -8,6 +8,7 @@ import glob
 from tileboard import TileBoard
 from player import Player
 from leveltitle import LevelTitle
+from levelmanager import LevelManager
 
 
 
@@ -170,7 +171,8 @@ def run_game(g, level_filenm):
 
 
 def main():
-    level_filenms = sorted(glob.glob("level_*.kgl"))
+    #level_filenms = sorted(glob.glob("level_*.kgl"))
+    level_filenms = LevelManager().level_sections[0].level_filenms
     level_idx = 0
     while 1:
         level_filenm = level_filenms[level_idx]
