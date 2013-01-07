@@ -7,7 +7,7 @@ class HUD:
 
     def __init__(self, g):
         self.g = g
-        self.font = pygame.font.Font("freesansbold.ttf", 28)
+        self.font = pygame.font.Font("freesansbold.ttf", 22)
 
     def draw(self, section_name, level_name):
         # Draw a background for the HUD.
@@ -21,6 +21,5 @@ class HUD:
         text_rect.center = (self.g.width//2, self.g.height+self.g.hud_height//2)
         self.g.surface.blit(text_surface, text_rect)
 
-        print "+++", text_rect
 
 

@@ -36,22 +36,24 @@ class TileBoard:
 
     bg_color = (0, 0, 0)
 
-    tile_width = 20
-    tile_height = 20
-    layer_offset = tile_height // 2
+    #tile_width = 20
+    #tile_height = 20
+    #layer_offset = tile_height // 2
 
-    player_width = tile_width // 2
-    player_height = (tile_height * 4) // 3
-    player_offset = -int(tile_height // 2)
+    #player_width = tile_width // 2
+    #player_height = (tile_height * 4) // 3
+    #player_offset = -int(tile_height // 2)
 
     def _init_constants(self):
-        w, h = self.g.width, self.g.height - self.g.hud_height
-        if self.grid_width > self.grid_height:
+        w, h = self.g.width, self.g.height
+        if False and self.grid_width >= self.grid_height:
             self.tile_width = (w - self.bx * 2) // self.grid_width
             self.tile_height = self.tile_width
+            self.fit_type = "width"
         else:
             self.tile_height = (h - self.by * 2) // self.grid_height
             self.tile_width = self.tile_height
+            self.fit_type = "height"
         self.layer_offset = int(self.tile_height // 2)
         self.player_width = int(self.tile_width // 2)
         self.player_height = int((self.tile_height * 4) // 3)
@@ -59,6 +61,8 @@ class TileBoard:
 
     def dump_constants(self):
         print >>sys.stderr, "w=%s h=%s hud=%s" % (self.g.width, self.g.height, self.g.hud_height)
+        print >>sys.stderr, "fit_type=%s" % (self.fit_type)
+        print >>sys.stderr, "gw=%s gh=%s" % (self.grid_width, self.grid_height)
         print >>sys.stderr, "tw=%s th=%s" % (self.tile_width, self.tile_height)
         print >>sys.stderr, "lo=%s" % self.layer_offset
         print >>sys.stderr, "pw=%s ph=%s" % (self.player_width, self.player_height)

@@ -1,5 +1,6 @@
 import os
 import glob
+import json
 
 """
 
@@ -42,6 +43,10 @@ class LevelSection:
         t = sorted(glob.glob(os.path.join(self.dirnm, "*.kgs")))
         if len(t) > 0:
             self.section_filenm = t[0] 
+            jdat = json.load(open(self.section_filenm))
+            self.section_name = jdat["name"]
+            self.start_message = jdat["start_message"]
+            self.end_message = jdat["end_message"]
         else:
             self.section_filenm = None
         if len(t) > 1:

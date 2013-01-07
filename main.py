@@ -9,7 +9,7 @@ from tileboard import TileBoard
 from player import Player
 from leveltitle import LevelTitle
 from levelmanager import LevelManager
-from modalmessage import ModalMessage
+from modalmessage import ModalMessage, BadModalMessage, GoodModalMessage
 from hud import HUD
 
 
@@ -110,12 +110,12 @@ for x, filenm in tile_filenm_map.items():
     globalz.images[x] = globalz.images[x].convert_alpha()
 
 
-def run_game(g, level_filenm, hud, level_mgr):
+def run_game(g, level_filenm, hud, level_section):
     pygame.display.flip()
 
     clock = pygame.time.Clock()
 
-    tb = TileBoard(g, 100, 100, filenm=level_filenm)
+    tb = TileBoard(g, 40, 40, filenm=level_filenm)
 
     start = (tb.start[0], tb.start[1], 1)
     player = Player(start)
@@ -132,7 +132,7 @@ def run_game(g, level_filenm, hud, level_mgr):
     while running:
         g.surface.fill((0,0,0))
 
-        hud.draw("(TDB)", tb.level_name)
+        hud.draw(level_section.section_name, tb.level_name)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -184,10 +184,11 @@ def run_game(g, level_filenm, hud, level_mgr):
     msg = None
     if status == "killed":
         msg = ["You failed.", "", "Try again."]
+        mm = BadModalMessage(tb.g)
     elif status == "won":
         msg = "Good job!"
+        mm = GoodModalMessage(tb.g)
     if msg is not None:
-        mm = ModalMessage(tb.g)
         mm.draw(msg)
 
     return restart
@@ -199,18 +200,23 @@ def main():
     level_section = lm.level_sections[0]
     level_filenm = level_section.level_filenms[0]
 
+    mm = GoodModalMessage(globalz)
+    mm.draw(level_section.start_message)
+
     hud = HUD(globalz)
 
     while 1:
-        restart = run_game(globalz, level_filenm, hud, lm)
+        restart = run_game(globalz, level_filenm, hud, level_section)
         globalz.surface.fill((0,0,0))
         if restart == "won":
             level_section, level_filenm = lm.next()
             if level_filenm is None:
-                lt = LevelTitle(globalz)
-                lt.draw("               You won!                 ")
-                pygame.display.flip()
-                time.sleep(1.5)
+                #lt = LevelTitle(globalz)
+                #lt.draw("               You won!                 ")
+                #pygame.display.flip()
+                #time.sleep(1.5)
+                mm = GoodModalMessage(globalz)
+                mm.draw(["", " You won! ", ""])
                 print >>sys.stderr, "No more levels."
                 break
         elif restart in ("next", "prev", "next section", "prev section"):

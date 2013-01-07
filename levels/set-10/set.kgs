@@ -1,5 +1,5 @@
 {
-    "name":"Joe's Labyrinth Adventure"
+    "name":"Joe's Labyrinth Adventure",
     "start_message":[
         "Once, Joe the orange rectangle decided",
         "he was better than the Ancients and",
@@ -11,7 +11,7 @@
         "Find out how to do these puzzles, escape",
         "from the puzzle Labyrinth, and find out",
         "who cast the spell!"
-        ]
+        ],
     "end_message":[
         "To be continued..."
      ]
