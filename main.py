@@ -200,6 +200,14 @@ def main():
             tlevel_section, tlevel_filenm = lm.prev()
             if tlevel_filenm is not None:
                 level_section, level_filenm = tlevel_section, tlevel_filenm
+        elif restart == "next section":
+            tlevel_section, tlevel_filenm = lm.next_section()
+            if level_filenm is not None:
+                level_section, level_filenm = tlevel_section, tlevel_filenm
+        elif restart == "prev section":
+            tlevel_section, tlevel_filenm = lm.prev_section()
+            if level_filenm is not None:
+                level_section, level_filenm = tlevel_section, tlevel_filenm
         elif restart is False:
             break
 

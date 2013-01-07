@@ -107,6 +107,28 @@ class LevelManager:
         s = self.level_sections[self.section_idx]
         return s, s.level_filenms[self.level_idx]
 
+    def next_section(self):
+        lidx = 0
+        sidx = self.section_idx + 1
+        if sidx >= len(self.level_sections):
+            return None, None
+        self.level_idx = lidx 
+        self.section_idx = sidx
+        s = self.level_sections[self.section_idx]
+        return s, s.level_filenms[self.level_idx]
+
+    def prev_section(self):
+        lidx = 0
+        sidx = self.section_idx - 1
+        if sidx < 0:
+            return None, None
+        self.level_idx = lidx 
+        self.section_idx = sidx
+        s = self.level_sections[self.section_idx]
+        return s, s.level_filenms[self.level_idx]
+
+
+
 
 if __name__=="__main__":
     lm = LevelManager()
