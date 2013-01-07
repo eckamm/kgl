@@ -45,7 +45,7 @@ class TileBoard:
     player_offset = -int(tile_height // 2)
 
     def _init_constants(self):
-        w, h = self.g.width, self.g.height
+        w, h = self.g.width, self.g.height - self.g.hud_height
         if self.grid_width > self.grid_height:
             self.tile_width = (w - self.bx * 2) // self.grid_width
             self.tile_height = self.tile_width
@@ -58,7 +58,7 @@ class TileBoard:
 	self.player_offset = -int(self.player_height // 3)
 
     def dump_constants(self):
-        print >>sys.stderr, "w=%s h=%s" % (self.g.width, self.g.height)
+        print >>sys.stderr, "w=%s h=%s hud=%s" % (self.g.width, self.g.height, self.g.hud_height)
         print >>sys.stderr, "tw=%s th=%s" % (self.tile_width, self.tile_height)
         print >>sys.stderr, "lo=%s" % self.layer_offset
         print >>sys.stderr, "pw=%s ph=%s" % (self.player_width, self.player_height)

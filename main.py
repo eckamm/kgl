@@ -179,6 +179,22 @@ def run_game(g, level_filenm):
 
 #   time.sleep(2)
 
+    if status == "killed":
+        msg = "            You failed.  Try again.           "
+    elif status == "won":
+        msg = "            Good job!                         "
+    if status in ("killed", "won"):
+        lt.draw(msg)
+        pygame.display.flip()
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                elif event.type == pygame.KEYDOWN:
+                    running = False
+            clock.tick(tick)
+
     return restart
 
 
@@ -194,6 +210,10 @@ def main():
         if restart == "won":
             level_section, level_filenm = lm.next()
             if level_filenm is None:
+                lt = LevelTitle(globalz)
+                lt.draw("               You won!                 ")
+                pygame.display.flip()
+                time.sleep(1.5)
                 print >>sys.stderr, "No more levels."
                 break
         elif restart in ("next", "prev", "next section", "prev section"):
