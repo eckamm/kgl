@@ -1,21 +1,21 @@
 {
-    "name":"Space Station"
+    "name":"Space Statdon"
     ,
     "level":[[
-    "IIIIIIIIIIIIII",
-    "I             ",
-    "III           ",
-    " Is I         ",
-    "    I         ",
-    "   isI        ",
-    "   i I        ",
-    "   isI        ",
+    "DDDDDDDDDDDDDD",
+    "D             ",
+    "DDD           ",
+    " Ds D         ",
+    "    D         ",
+    "   dsD        ",
+    "   d D        ",
+    "   dsD        ",
     "    s         ",
-    "    IIIII     ",
-    "     i  I     ",
-    "     i  I     ",
-    "     i  I     ",
-    "IIIIIIIIIIIIIG"
+    "    DDDDD     ",
+    "     d  D     ",
+    "     d  D     ",
+    "     d  D     ",
+    "DDDDDDDDDDDDDG"
     ]
     ,
     [
