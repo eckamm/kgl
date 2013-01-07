@@ -32,7 +32,7 @@ import pygame
 
 
 class TileBoard:
-    legal_crate_move_tiles = (" ","I")
+    legal_crate_move_tiles = (" ","I","D")
 
     bg_color = (0, 0, 0)
 

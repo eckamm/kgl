@@ -3,8 +3,8 @@ import pygame
 
 
 class Player:
-    legal_player_move_tiles = (" ", "i")
-    legal_crate_move_tiles = (" ", "I")
+    legal_player_move_tiles = (" ", "i","d")
+    legal_crate_move_tiles = (" ", "I","D")
     goal_tiles = ("G",)
 
     def __init__(self, tile_loc):
