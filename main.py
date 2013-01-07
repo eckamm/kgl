@@ -9,6 +9,8 @@ from tileboard import TileBoard
 from player import Player
 from leveltitle import LevelTitle
 from levelmanager import LevelManager
+from modalmessage import ModalMessage
+from hud import HUD
 
 
 
@@ -45,7 +47,7 @@ pygame.font.init()
 width = 640
 height = 640
 width = 760
-height = 760
+height = 660
 hud_height = 100
 
 
@@ -62,7 +64,7 @@ class Globalz:
         self.joystick_count = joystick_count
         self.surface = surface
         self.width = width
-        self.height = height
+        self.height = height   # the height of the display not including the hud at the bottom
         self.hud_height = hud_height
         self.bg_color = bg_color
         self.friendly_crash = friendly_crash
@@ -70,7 +72,7 @@ class Globalz:
         self.scores = {}
 
 
-screen = pygame.display.set_mode((width, height), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((width, height+hud_height), pygame.FULLSCREEN)
 #screen = pygame.display.set_mode((width, height))
 pygame.mouse.set_visible(False)
 
@@ -108,7 +110,7 @@ for x, filenm in tile_filenm_map.items():
     globalz.images[x] = globalz.images[x].convert_alpha()
 
 
-def run_game(g, level_filenm):
+def run_game(g, level_filenm, hud, level_mgr):
     pygame.display.flip()
 
     clock = pygame.time.Clock()
@@ -129,6 +131,8 @@ def run_game(g, level_filenm):
 
     while running:
         g.surface.fill((0,0,0))
+
+        hud.draw("(TDB)", tb.level_name)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -167,9 +171,9 @@ def run_game(g, level_filenm):
 
         tb.draw(player.tile_loc)
 
-        elapsed = time.time() - start_time
-        if elapsed < 2.5:
-            lt.draw(tb.level_name)
+        #elapsed = time.time() - start_time
+        #if elapsed < 2.5:
+        #    lt.draw(tb.level_name)
 
         pygame.display.flip()
         clock.tick(tick)
@@ -177,23 +181,14 @@ def run_game(g, level_filenm):
         pygame.display.set_caption("FPS: %.2f" % (clock.get_fps(),))
     #   x_sound.play()
 
-#   time.sleep(2)
-
+    msg = None
     if status == "killed":
-        msg = "            You failed.  Try again.           "
+        msg = ["You failed.", "", "Try again."]
     elif status == "won":
-        msg = "            Good job!                         "
-    if status in ("killed", "won"):
-        lt.draw(msg)
-        pygame.display.flip()
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                elif event.type == pygame.KEYDOWN:
-                    running = False
-            clock.tick(tick)
+        msg = "Good job!"
+    if msg is not None:
+        mm = ModalMessage(tb.g)
+        mm.draw(msg)
 
     return restart
 
@@ -204,8 +199,10 @@ def main():
     level_section = lm.level_sections[0]
     level_filenm = level_section.level_filenms[0]
 
+    hud = HUD(globalz)
+
     while 1:
-        restart = run_game(globalz, level_filenm)
+        restart = run_game(globalz, level_filenm, hud, lm)
         globalz.surface.fill((0,0,0))
         if restart == "won":
             level_section, level_filenm = lm.next()
