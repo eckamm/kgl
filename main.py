@@ -160,7 +160,7 @@ def run_game(g, level_filenm):
                     restart = True
                     running = False
                 elif status == "won":
-                    restart = "next"
+                    restart = "won"
                     running = False
 
             #print "++", event
@@ -191,22 +191,21 @@ def main():
     while 1:
         restart = run_game(globalz, level_filenm)
         globalz.surface.fill((0,0,0))
-        if restart == "next":
+        if restart == "won":
             level_section, level_filenm = lm.next()
             if level_filenm is None:
                 print >>sys.stderr, "No more levels."
                 break
-        elif restart == "prev":
-            tlevel_section, tlevel_filenm = lm.prev()
+        elif restart in ("next", "prev", "next section", "prev section"):
+            if restart == "next":
+                tlevel_section, tlevel_filenm = lm.next()
+            elif restart == "prev":
+                tlevel_section, tlevel_filenm = lm.prev()
+            elif restart == "next section":
+                tlevel_section, tlevel_filenm = lm.next_section()
+            elif restart == "prev section":
+                tlevel_section, tlevel_filenm = lm.prev_section()
             if tlevel_filenm is not None:
-                level_section, level_filenm = tlevel_section, tlevel_filenm
-        elif restart == "next section":
-            tlevel_section, tlevel_filenm = lm.next_section()
-            if level_filenm is not None:
-                level_section, level_filenm = tlevel_section, tlevel_filenm
-        elif restart == "prev section":
-            tlevel_section, tlevel_filenm = lm.prev_section()
-            if level_filenm is not None:
                 level_section, level_filenm = tlevel_section, tlevel_filenm
         elif restart is False:
             break

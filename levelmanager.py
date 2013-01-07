@@ -99,7 +99,8 @@ class LevelManager:
         sidx = self.section_idx
         if lidx < 0:
             sidx -= 1
-            lidx = 0
+            if sidx >= 0:
+                lidx = len(self.level_sections[sidx].level_filenms)-1
         if sidx < 0:
             return None, None
         self.level_idx = lidx 
