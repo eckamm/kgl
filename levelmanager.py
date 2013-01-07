@@ -26,14 +26,20 @@ levels/
 
 class LevelSection:
     """
+    organizes a collection of level definitions
+
     LevelSection.level_filenms -> list of .kgl file names
     LevelSection.section_filenm -> .kgs file name or None
     """
     def __init__(self, dirnm):
-        # Collect the level file names.
-        self.level_filenms = glob.glob(os.path.join(dirnm, "*.kgl"))
-        # Determine the .kgs file name.
-        t = sorted(glob.glob(os.path.join(dirnm, "*.kgs")))
+        self.dirnm = dirnm
+        self.refresh()
+
+    def refresh(self):
+        # Collect the level file names (.kgl).
+        self.level_filenms = glob.glob(os.path.join(self.dirnm, "*.kgl"))
+        # Determine the section file name (.kgs).
+        t = sorted(glob.glob(os.path.join(self.dirnm, "*.kgs")))
         if len(t) > 0:
             self.section_filenm = t[0] 
         else:
@@ -46,10 +52,17 @@ class LevelSection:
 
 
 class LevelManager:
+    """
+    organizes the collections (sections) of level definitions
+
+    LevelManager.level_sections -> list of LevelSections
+    """
     def __init__(self, basedir="levels"):
         self.basedir = basedir
         self.current = 0
         self.refresh()
+        self.section_idx = 0
+        self.level_idx = 0
 
     def refresh(self): 
         self.level_sections = []
@@ -67,6 +80,32 @@ class LevelManager:
                 self.level_sections.append(ls)
             else:
                 print >>sys.stderr, "NOTE: ignoring empty level section %r" % dirnm
+
+    def next(self):
+        lidx = self.level_idx + 1
+        sidx = self.section_idx
+        if lidx >= len(self.level_sections[sidx].level_filenms):
+            sidx += 1
+            lidx = 0
+        if sidx >= len(self.level_sections):
+            return None, None
+        self.level_idx = lidx 
+        self.section_idx = sidx
+        s = self.level_sections[self.section_idx]
+        return s, s.level_filenms[self.level_idx]
+
+    def prev(self):
+        lidx = self.level_idx - 1
+        sidx = self.section_idx
+        if lidx < 0:
+            sidx -= 1
+            lidx = 0
+        if sidx < 0:
+            return None, None
+        self.level_idx = lidx 
+        self.section_idx = sidx
+        s = self.level_sections[self.section_idx]
+        return s, s.level_filenms[self.level_idx]
 
 
 if __name__=="__main__":

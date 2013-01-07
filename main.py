@@ -140,7 +140,18 @@ def run_game(g, level_filenm):
                     running = False
                     restart = True
                 elif event.key == pygame.K_n:
-                    restart = "next"
+                    mods = pygame.key.get_mods()
+                    if mods & pygame.KMOD_SHIFT:
+                        restart = "next section"
+                    else:
+                        restart = "next"
+                    running = False
+                elif event.key == pygame.K_p:
+                    mods = pygame.key.get_mods()
+                    if mods & pygame.KMOD_SHIFT:
+                        restart = "prev section"
+                    else:
+                        restart = "prev"
                     running = False
                 status = player.keyboard_event(event, tb)
                 if status == "killed":
@@ -171,21 +182,27 @@ def run_game(g, level_filenm):
 
 
 def main():
-    #level_filenms = sorted(glob.glob("level_*.kgl"))
-    level_filenms = LevelManager().level_sections[0].level_filenms
-    level_idx = 0
+    lm = LevelManager()
+    level_section = lm.level_sections[0]
+    level_filenm = level_section.level_filenms[0]
+
     while 1:
-        level_filenm = level_filenms[level_idx]
         restart = run_game(globalz, level_filenm)
         globalz.surface.fill((0,0,0))
         if restart == "next":
-            level_idx += 1
-            if level_idx >= len(level_filenms):
+            level_section, level_filenm = lm.next()
+            if level_filenm is None:
                 print >>sys.stderr, "No more levels."
                 break
+        elif restart == "prev":
+            tlevel_section, tlevel_filenm = lm.prev()
+            if tlevel_filenm is not None:
+                level_section, level_filenm = tlevel_section, tlevel_filenm
         elif restart is False:
             break
-    time.sleep(0.5)
+
+    pygame.quit()
+
 
 
 if __name__=="__main__":
@@ -195,4 +212,5 @@ if __name__=="__main__":
     p = pstats.Stats("profile.data")
     p.strip_dirs().sort_stats('time').print_stats()
 #   main() 
+
 
