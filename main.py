@@ -46,9 +46,16 @@ pygame.font.init()
 # Window dimensions.
 width = 640
 height = 640
-width = 760
-height = 660
+width = 660   # the height of the display not including the hud at the bottom
+height = 660   # we want a square play area (not including the hud)
 hud_height = 100
+mode_options = pygame.FULLSCREEN
+
+if True:
+    width = 520   # the height of the display not including the hud at the bottom
+    height = 520   # we want a square play area (not including the hud)
+    hud_height = 50
+    mode_options = 0
 
 
 class Globalz:
@@ -72,7 +79,7 @@ class Globalz:
         self.scores = {}
 
 
-screen = pygame.display.set_mode((width, height+hud_height), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((width, height+hud_height), mode_options)
 #screen = pygame.display.set_mode((width, height))
 pygame.mouse.set_visible(False)
 
@@ -115,7 +122,7 @@ def run_game(g, level_filenm, hud, level_section):
 
     clock = pygame.time.Clock()
 
-    tb = TileBoard(g, 40, 40, filenm=level_filenm)
+    tb = TileBoard(g, 40, 54, filenm=level_filenm)
 
     start = (tb.start[0], tb.start[1], 1)
     player = Player(start)
@@ -242,7 +249,7 @@ if __name__=="__main__":
     import pstats
     cProfile.run("main()", "profile.data")
     p = pstats.Stats("profile.data")
-    p.strip_dirs().sort_stats('time').print_stats()
+#   p.strip_dirs().sort_stats('time').print_stats()
 #   main() 
 
 
