@@ -53,6 +53,13 @@ class Crate:
     def move_to(self, loc):
         pass
 
+    def move(self, src, dest, tb):
+        """
+        
+        """
+        
+
+
 
 
 class CrateManager:
@@ -66,5 +73,8 @@ class CrateManager:
         """
         returns Crate found at location or None
         """
+
+
+
 
 

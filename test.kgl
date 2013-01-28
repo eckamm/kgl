@@ -1,0 +1,59 @@
+{
+    "name":"The Abandoned City, Pt.1"
+    ,
+    "level":[[
+    "ffffffff",
+    "fPffffff",
+    "fff  fff",
+    "ffffffff",
+    "ffffffff",
+    "ffffffff",
+    "fffddfff",
+    "ffffffff",
+    " ffffff ",
+    "  ffff  ",
+    "  fd f  ",
+    "  ffff  ",
+    "  ffGf  ",
+    "  ffff  "
+    ]
+    ,
+    [
+    "wwwwwwww",
+    "w      w",
+    "w      w",
+    "w  cc  w",
+    "w      w",
+    "w  cc  w",
+    "w      w",
+    "w      w",
+    " w    w ",
+    "  wccw  ",
+    "  w  w  ",
+    "  w  w  ",
+    "  w  w  ",
+    "  wwww  "
+    ]
+    ]
+    ,
+    "start":[1,1]
+    ,
+    "switch_effects": [
+    "wwwwwwww",
+    "w      w",
+    "w      w",
+    "w  cc  w",
+    "w      w",
+    "w  cc  w",
+    "w      w",
+    "w      w",
+    " w    w ",
+    "  wccw  ",
+    "  w  w  ",
+    "  w  w  ",
+    "  w  w  ",
+    "  wwww  "
+    ]
+
+
+}

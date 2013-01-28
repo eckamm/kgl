@@ -19,11 +19,12 @@ class Player:
         cell, objects = tb.get_cell(new_crate_loc)
         if cell not in Crate.legal_crate_move_tiles or len(objects - Crate.legal_crate_move_tiles)>0:
             # Crate destination is illegal.
-            return
+            return "no move"
         # Move the crate.
         tb.move_object("c", new_player_loc, new_crate_loc)
         # Move the player to its new location
         self.tile_loc = new_player_loc
+        return "moved"
 
 
     def keyboard_event(self, event, tb):
@@ -36,23 +37,22 @@ class Player:
             # No move was input.
             return
         cell, objects = tb.get_cell(new_player_loc)
-        #cell2 = tb.get_cell_perm(new_player_loc)
+
         if cell is None:
             # Player tried to move off board.
             return
-        #if cell in self.legal_player_move_tiles and cell2 in self.legal_player_move_tiles: # and cell2 not in (_)
-#       print ("+++", cell, objects, self.legal_player_move_tiles)
-#       print cell in self.legal_player_move_tiles 
-#       print (objects - self.legal_player_move_tiles)
-        if cell in self.legal_player_move_tiles and len(objects - self.legal_player_move_tiles)==0:
-            print "normal move"
+        elif cell in self.legal_player_move_tiles and len(objects - self.legal_player_move_tiles)==0:
             # Make a normal player move.
             self.player_move(new_player_loc)
         elif "c" in objects: # and (objects - self.legal_player_move_tiles):
-            print "crate push"
             # Attempt a crate push move.
             new_crate_loc = move_loc(event.key, new_player_loc)
-            self.crate_move(new_player_loc, new_crate_loc, tb)
+            status = self.crate_move(new_player_loc, new_crate_loc, tb)
+            if status == "no move":
+                return
+        else:
+            # Must be trying to move into an illegal space (e.g. solid block or red force-field.
+            return
 
         # Check if player is standing on solid ground. 
         t = (new_player_loc[0], new_player_loc[1], new_player_loc[2]-1)

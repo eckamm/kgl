@@ -11,7 +11,7 @@ class ModalMessage:
 
     def __init__(self, g):
         self.g = g
-        self.font = pygame.font.Font("freesansbold.ttf", 28)
+        self.font = pygame.font.Font("freesansbold.ttf", 20)
 
     def draw(self, txt):
         # Work with strings or lists of strings.

@@ -51,7 +51,7 @@ height = 660   # we want a square play area (not including the hud)
 hud_height = 100
 mode_options = pygame.FULLSCREEN
 
-if True:
+if False:
     width = 520   # the height of the display not including the hud at the bottom
     height = 520   # we want a square play area (not including the hud)
     hud_height = 50
