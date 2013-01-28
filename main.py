@@ -51,9 +51,10 @@ height = 660   # we want a square play area (not including the hud)
 hud_height = 100
 mode_options = pygame.FULLSCREEN
 
-if False:
-    width = 520   # the height of the display not including the hud at the bottom
-    height = 520   # we want a square play area (not including the hud)
+
+if True:
+    width = 620   # the height of the display not including the hud at the bottom
+    height = 620   # we want a square play area (not including the hud)
     hud_height = 50
     mode_options = 0
 
@@ -79,7 +80,7 @@ class Globalz:
         self.scores = {}
 
 
-screen = pygame.display.set_mode((width, height+hud_height), mode_options)
+screen = pygame.display.set_mode((width, height+hud_height), pygame.FULLSCREEN)
 #screen = pygame.display.set_mode((width, height))
 pygame.mouse.set_visible(False)
 
