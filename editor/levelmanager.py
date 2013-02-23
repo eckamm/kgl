@@ -82,18 +82,21 @@ import sys
 import os
 import glob
 import logging
+import json
+
 import pygame
 
 from buttons import Buttons
 from level import Level
+from events import *
 
 
-logger = logging.getLogger("leveleditor")
+LOGGER = logging.getLogger("levelmanager")
 
 
 
-def mk_empty_start_level(g, filenm):
-    level = Level(g, filenm)
+def mk_empty_start_level(filenm, lm, em):
+    level = Level(filenm, lm, em)
     level.size = (8, 8)
     return level
 
@@ -108,22 +111,85 @@ def mk_color_set():
 
 
 
-class LevelEditor:
-    def __init__(self, dirnm, event_manager):
+class LevelManager:
+    def __init__(self, dirnm, editor_state, event_manager):
+        self.editor_state = editor_state
         self.em = event_manager
         self.connections = [
+#           self.em.register(SysInitRequiredEvent, self.on_sysinit_required),
+            self.em.register(LevelManagerDumpEvent, self.on_lmdump),
+            self.em.register(LevelKeyChangeRequestEvent, self.on_level_key_change_request),
+            self.em.register(LevelManagerAddLevelRequestEvent, self.on_level_manager_add_level_request),
+            self.em.register(TAOPlacementRequestEvent, self.on_tao_placement_request),
         ]
-        logger.info("LevelEditor being created")
+        LOGGER.info("LevelManager being created")
         self.dirnm = dirnm
         self._levels = {}
         self._load_levels()
 
-    def _load_level_file(self, filenm):
-        self._levels[filenm] = Level(self.g, filenm)
+        self.current_key = sorted(self._levels.keys())[0]
+        # Need to announce this to other components.
+        self.em.post(LevelKeyChangeEvent(self.current_key))
 
-    def _find_level_files(self):
-        filenms = glob.glob(os.path.join(self.dirnm, "*.kgl"))
-        return sorted(filenms)
+    @property
+    def current_level(self):
+        return self._levels[self.current_key]
+
+
+#   def on_sysinit_required(self, event):
+#       self._load_levels()
+
+    def on_tao_placement_request(self, event):
+        tile_key = self.editor_state.current_tile_key
+        tile = self.editor_state.current_tile
+        level_key = self.editor_state.current_level_key
+        pos = (event.x, event.y, tile.jdat["z"])
+        level = self._levels[level_key]
+
+#       import pdb; pdb.set_trace()
+        START_TILE_KEY = ","
+        if tile_key == START_TILE_KEY:
+            level.start = list(pos[:2])    
+            LOGGER.info("start set to %r in %r" % (pos, level_key))
+            return
+
+        # Special case to make empty floor be " " instead of ".".
+        if tile_key == ".":
+            tile_key = " "
+
+        level.set_cell(pos, tile_key)
+
+        LOGGER.info("put %r at %r in %r" % (tile_key, level_key, pos))
+
+
+    def on_level_key_change_request(self, event):
+        keys = sorted(self._levels.keys())
+        curr_idx = keys.index(self.current_key)
+        if event.delta:
+            new_idx = max(0, min(len(keys)-1, curr_idx+event.delta))
+        else:
+            try:
+                keys[event.index]
+                new_idx = event.index
+            except IndexError:
+                new_idx = curr_idx
+        if new_idx != curr_idx:
+            self.current_key = keys[new_idx]
+            self.em.post(LevelKeyChangeEvent(self.current_key))
+            LOGGER.info("changed to level %s - %r" % (new_idx, keys[new_idx]))
+
+    def on_lmdump(self, event):
+        self.dump()
+
+
+    def on_level_manager_add_level_request(self, event):
+        keys = sorted(self._levels.keys())
+        # Create an empty initial level.
+        filenm = os.path.join(self.dirnm, "%03d-level.kgl" % len(keys))
+        level = mk_empty_start_level(filenm, self, self.em)
+        self._levels[filenm] = level
+        self.em.post(LevelKeyChangeRequestEvent(delta=0, index=-1))
+
 
     def _load_levels(self):
         filenms = self._find_level_files()
@@ -132,10 +198,25 @@ class LevelEditor:
         if not self._levels:
             # Create an empty initial level.
             filenm = os.path.join(self.dirnm, "000-start.kgl")
-            level = mk_empty_start_level(self.g, filenm)
+            level = mk_empty_start_level(filenm, self, self.em)
             self._levels[filenm] = level
 
-            
+    def _find_level_files(self):
+        filenms = glob.glob(os.path.join(self.dirnm, "*.kgl"))
+        return sorted(filenms)
+
+    def _load_level_file(self, filenm):
+        self._levels[filenm] = Level(filenm, self, self.em)
+        LOGGER.info("loaded %r" % (filenm,))
+
+    def dump(self, fp=sys.stderr):
+        print >>fp, "#levels: %s" % len(self._levels)
+        for key, level in sorted(self._levels.items()):
+            print >>fp, "Level: %s" % (key,)
+            print >>fp, "    size: %s" % (level.size,)
+
+
+'''            
     def run(self):
         g = self.g
         tick = 30
@@ -202,12 +283,7 @@ class LevelEditor:
             pygame.display.flip()
             frame_cnt += 1
             clock.tick(tick)
-
-    def dump(self, fp=sys.stderr):
-        print >>fp, "#levels: %s" % len(self._levels)
-        for key, level in sorted(self._levels.items()):
-            print >>fp, "Level: %s" % (key,)
-            print >>fp, "    size: %s" % (level.size,)
+'''
 
 
 

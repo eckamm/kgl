@@ -193,6 +193,7 @@ class TileBoard:
            try:
             return self.data1d[idx], self.objects.get(loc, set())
            except:
+            raise
             import pdb; pdb.set_trace()
         else:
             return None, set()

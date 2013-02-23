@@ -1,0 +1,29 @@
+{
+    "start": [
+        0, 
+        0
+    ], 
+    "name": "level name", 
+    "level": [
+        [
+            "ffdddddd", 
+            "fFsFsFsd", 
+            "dsFsFsFd", 
+            "dFsFsFsd", 
+            "dsFsFsFd", 
+            "dFsFsFsd", 
+            "dsFsFsFf", 
+            "ddddddfG"
+        ], 
+        [
+            "        ", 
+            "        ", 
+            "        ", 
+            "        ", 
+            "        ", 
+            "        ", 
+            "        ", 
+            "        "
+        ]
+    ]
+}

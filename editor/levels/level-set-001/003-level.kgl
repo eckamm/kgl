@@ -1,0 +1,41 @@
+{
+    "start": [
+        0, 
+        0
+    ], 
+    "name": "Space Station", 
+    "level": [
+        [
+            "DDDDDDDDDDDDDD", 
+            "D             ", 
+            "DDD           ", 
+            " Ds D.        ", 
+            "    D.        ", 
+            "   dsD        ", 
+            "   d D        ", 
+            "   dsD        ", 
+            "    s         ", 
+            "    DDDDD     ", 
+            "     d  D     ", 
+            "     d  D     ", 
+            "     d  D     ", 
+            "DDDDDDDDDDDDDG"
+        ], 
+        [
+            "              ", 
+            "              ", 
+            "              ", 
+            "  c           ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              "
+        ]
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "start": [
+        0, 
+        0
+    ], 
+    "name": "FINAL LEVEL: End of Demo-ish Thing", 
+    "level": [
+        [
+            "D             ", 
+            "D  DDDDDDD    ", 
+            "D  D     D    ", 
+            "D  D     D    ", 
+            "F  Ddd   D    ", 
+            "F  D     D    ", 
+            "F  D     D    ", 
+            "F  DDD   G    ", 
+            "f    D        ", 
+            "f    D        ", 
+            "f  DDFd       ", 
+            "f  D dd       ", 
+            "s  FFFFFFFF   ", 
+            "sssFFFFFFFF   "
+        ], 
+        [
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              "
+        ]
+    ]
+}

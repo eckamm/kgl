@@ -1,0 +1,41 @@
+{
+    "start": [
+        0, 
+        0
+    ], 
+    "name": "Disco MAYHEM", 
+    "level": [
+        [
+            "DDDDDddddddddd", 
+            "ddddDddDDDDDdd", 
+            "dDddDddDdddDdd", 
+            "ddDdDddDdDdDdd", 
+            "dDddDddDdddDdd", 
+            "ddDdDDDDdDdDdd", 
+            "dddddddddddDdd", 
+            "ddDDDDDDDDDDdd", 
+            "ddDddddddddddd", 
+            "ddDdDdDDDDDDdd", 
+            "ddDdddDddddDdd", 
+            "ddDdDdDdDddDdd", 
+            "ddDdddDddDdGdd", 
+            "ddDDDDDdDddddd"
+        ], 
+        [
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              "
+        ]
+    ]
+}

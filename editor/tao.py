@@ -8,24 +8,121 @@
     |     C    |
     +----------+
 
-    * P: previous level
-    * N: next level
-    * +: new level
-    * S: save levels
-    * Q: quit without saving
+    B:
+    +-+-+-+-+
+    | | | | |
+    +-+-+-+-+
+    | | | | |
+    +-+-+-+-+
+    | | | | |
+    +-+-+-+-+
+    | | | | |
+    +-+-+-+-+
+    | | | | |
+    +-+-+-+-+
 
-    +----------+
-    | P N +    |
-    +----------+
+
+What is the inner rect (inside the padding)?
+    rect
+
+
 
 """
 import logging
+import itertools
 import pygame
 
 from events import *
 
 
 LOGGER = logging.getLogger("buttons")
+
+
+
+class TAO:
+    def __init__(self, surf, tile_manager, event_manager):
+        self.surf = surf
+        self.tm = tile_manager
+        self.em = event_manager
+        self.connections = [
+            self.em.register(MouseButtonUpEvent, self.on_mouse_button_up),
+        ]
+
+        self.selected_tile = None
+        self.ctrl = None
+
+
+    def on_mouse_button_up(self, event):
+        """
+        look for a mouse-button-up on button regions
+
+        Posts a TAOSelectionEvent if a tile or object was selected.
+        """
+        surf_abs_rect = self.surf.get_rect(topleft=self.surf.get_abs_offset())
+        if surf_abs_rect.collidepoint(event.pg_event.pos):
+            if not self.ctrl:
+                # no tiles shown in select area yet
+                return
+            for tile_key, tile, rect in self.ctrl:
+                # rect is in local coords to start with
+                r = rect.copy()
+                r.move_ip(surf_abs_rect.left, surf_abs_rect.top)
+                if r.collidepoint(event.pg_event.pos):
+                    LOGGER.info("mouse button up in %r" % ((tile_key, tile, rect),))
+                    self.selected_tile = tile # need to highlight selected tile
+                    self.em.post(TAOSelectionEvent(tile_key, tile)) # change EditorState
+
+
+#       # pos is in absolute coords such as you might get from a mouse event.
+#       # Translate self's rect to absolute coords.
+#       abs_rect = self.subsurf.get_rect(topleft=self.subsurf.get_abs_offset())
+#       return abs_rect.collidepoint(pos)
+
+
+
+    def draw(self):
+        self.surf.fill((20,30,40))
+
+        # Establish the rect within the padding.
+        # Pad w/10 on sides.  Pad h/10 on top and bottom.
+        rect = self.surf.get_rect()
+        w, h = rect.size
+        rect.inflate_ip(-w/5, -h/5)
+        rect.topleft = (w/10, h/10)
+#       pygame.draw.rect(self.surf, (0,0,0), rect)
+
+        # Establish the shape of the grid of tiles being layed out.
+        cnt = len(self.tm.tiles)
+        w_cnt = 5 # tiles to draw vertically
+        h_cnt = 5 # tiles to draw horizontally; FIX: should be function of other vars
+
+        grid_w = rect.width / w_cnt
+        grid_h = rect.height / h_cnt
+        
+        clrs = itertools.cycle([(50,10,10), (10,10,50), (10,50,10)])
+
+        tiles_items = sorted(self.tm.tiles.items())
+
+        ctrl = []
+
+        # FIX: the rects aren't in the right place.
+
+        for iw in reversed(range(w_cnt)):
+            for ih in range(h_cnt):
+                r = pygame.Rect(rect.left+iw*grid_w, 
+                                rect.top+ih*grid_h,
+                                grid_w, 
+                                grid_h)
+                #pygame.draw.rect(self.surf, clrs.next(), r, 1)
+                if tiles_items:
+                    tile_key, tile = tiles_items.pop(0)
+                    tile.render(self.surf, r.bottomleft, (grid_w/2, grid_h/2))
+                    ctrl.append((tile_key, tile, r))
+
+        self.ctrl = ctrl
+        return
+
+
 
 
 def mk_button_surf(font, text, border_size):

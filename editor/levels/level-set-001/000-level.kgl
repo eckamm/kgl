@@ -1,0 +1,41 @@
+{
+    "start": [
+        8, 
+        13
+    ], 
+    "name": "The Beginning", 
+    "level": [
+        [
+            "ssssssssssssss", 
+            "gggggggggggggg", 
+            "gsffffffssfffg", 
+            "gsfffffsfffffg", 
+            "gsfffssffffffg", 
+            "gsffsffffffffg", 
+            "gsssfffffffffg", 
+            "gsssfffffffffg", 
+            "gsffsffffffffg", 
+            "gsfffssffffffg", 
+            "gsfffffsfffffg", 
+            "gsffffffssfffg", 
+            "gggggggggggggg", 
+            "sssssssssssssG"
+        ], 
+        [
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              ", 
+            "              "
+        ]
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "name":"Level Set Name Goes Here",
+    "start_message":[
+        "Start mesage",
+        "goes here."
+        ],
+    "end_message":[
+        "End mesage",
+        "goes here."
+     ]
+}

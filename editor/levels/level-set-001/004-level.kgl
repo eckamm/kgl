@@ -1,0 +1,45 @@
+{
+    "start": [
+        6, 
+        2
+    ], 
+    "name": "Build a Bridge Workshop", 
+    "level": [
+        [
+            "  DDDDDDDDD     ", 
+            "  DsssssssD     ", 
+            "  DsssssssD     ", 
+            "  DsssssssD     ", 
+            "  DsssssssD     ", 
+            "  DsssssssD     ", 
+            "  DDDD DDDD     ", 
+            "                ", 
+            "                ", 
+            "  DDDD DDDD     ", 
+            "  DsssssssD     ", 
+            "  DsssssssD     ", 
+            "  DsssGsssD     ", 
+            "  DsssssssD     ", 
+            "  DsssssssD     ", 
+            "  DDDDDDDDD     "
+        ], 
+        [
+            "  IIIIIIIII     ", 
+            "  I       I     ", 
+            "  I c   c I     ", 
+            "  I       I     ", 
+            "  I c   c I     ", 
+            "  I       I     ", 
+            "  IIII IIII     ", 
+            "                ", 
+            "                ", 
+            "  IIII IIII     ", 
+            "  I       I     ", 
+            "  I       I     ", 
+            "  I       I     ", 
+            "  I       I     ", 
+            "  I       I     ", 
+            "  IIIIIIIII     "
+        ]
+    ]
+}

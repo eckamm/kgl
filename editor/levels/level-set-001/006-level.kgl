@@ -1,0 +1,41 @@
+{
+    "start": [
+        4, 
+        4
+    ], 
+    "name": "The Fuuuuuuture, Pt.1", 
+    "level": [
+        [
+            "FFFFFFFFFFFFFF", 
+            "F            F", 
+            "F FFF        F", 
+            "F FFF        F", 
+            "F FFF        F", 
+            "F d   FFFG   F", 
+            "FFFFF        F", 
+            "FFFFF        F", 
+            "FFFFF        F", 
+            "F            F", 
+            "F          . F", 
+            "F            F", 
+            "F            F", 
+            "FFFFFFFFFFFFFF"
+        ], 
+        [
+            "WWWWWWWWWWWWWW", 
+            "W            W", 
+            "W            W", 
+            "W            W", 
+            "W  c         W", 
+            "W            W", 
+            "W            W", 
+            "W c c        W", 
+            "W            W", 
+            "W            W", 
+            "W            W", 
+            "W            W", 
+            "W            W", 
+            "WWWWWWWWWWWWWW"
+        ]
+    ]
+}

@@ -4,6 +4,7 @@ import time
 import random
 import pygame
 import glob
+import logging
 
 from tileboard import TileBoard
 from player import Player
@@ -21,6 +22,7 @@ else:
 
 base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 sound_dir = os.path.join(base_dir, "sounds")
+images_dir = os.path.join(base_dir, "images")
 
 
 random.seed(0)
@@ -95,8 +97,8 @@ globalz = Globalz(num_players,
                   eat_sound=None)
 
 globalz.images = {}
-globalz.images["apple"] = pygame.image.load("kewlapple_64x64.png")
-globalz.images["apple"].convert()
+#globalz.images["apple"] = pygame.image.load("kewlapple_64x64.png")
+#globalz.images["apple"].convert()
 
 tile_filenm_map = {
     "i": "ForceBox.png",
@@ -114,7 +116,7 @@ tile_filenm_map = {
     "d": "ForceBoxFloor.png",
 }
 for x, filenm in tile_filenm_map.items():
-    globalz.images[x] = pygame.image.load(filenm)
+    globalz.images[x] = pygame.image.load(os.path.join(images_dir, filenm))
     globalz.images[x] = globalz.images[x].convert_alpha()
 
 
@@ -204,7 +206,8 @@ def run_game(g, level_filenm, hud, level_section):
 
 
 def main():
-    lm = LevelManager()
+    level_sets_dirnm = r"editor/levels"
+    lm = LevelManager(level_sets_dirnm)
     level_section = lm.level_sections[0]
     level_filenm = level_section.level_filenms[0]
 
@@ -248,6 +251,7 @@ def main():
 if __name__=="__main__":
     import cProfile
     import pstats
+    logging.basicConfig(level=logging.INFO)
     cProfile.run("main()", "profile.data")
     p = pstats.Stats("profile.data")
 #   p.strip_dirs().sort_stats('time').print_stats()

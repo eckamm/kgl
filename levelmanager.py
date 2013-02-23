@@ -1,6 +1,9 @@
 import os
 import glob
 import json
+import logging
+
+LOGGER = logging.getLogger("levelmanager")
 
 """
 
@@ -39,6 +42,7 @@ class LevelSection:
     def refresh(self):
         # Collect the level file names (.kgl).
         self.level_filenms = glob.glob(os.path.join(self.dirnm, "*.kgl"))
+        LOGGER.info("found %s levels; %r" % (len(self.level_filenms), self.level_filenms))
         # Determine the section file name (.kgs).
         t = sorted(glob.glob(os.path.join(self.dirnm, "*.kgs")))
         if len(t) > 0:

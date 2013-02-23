@@ -1,0 +1,45 @@
+{
+    "start": [
+        1, 
+        1
+    ], 
+    "name": "Stuck in a Maze", 
+    "level": [
+        [
+            "ggggggggggggg   ", 
+            "ggggggggggggg   ", 
+            "ggggggggggggg   ", 
+            "ggggggggggggg   ", 
+            "ggggggggggggg   ", 
+            "ggggggggggggg   ", 
+            "ggggggggggggg   ", 
+            "ggggggggggggg   ", 
+            ".gggggggggggg   ", 
+            "ggggggggggggg   ", 
+            "ggggggggggggg   ", 
+            "ggggggggggggg   ", 
+            "gggggggggGggg   ", 
+            "ggggggggggggg   ", 
+            "ggggggggggggg   ", 
+            "ggggggggggggg   "
+        ], 
+        [
+            "wwwwwwwwwwwww   ", 
+            "w           w   ", 
+            "w wwww wwww w   ", 
+            "w ww   w  w w   ", 
+            "w  www ww w w   ", 
+            "ww ww     w w   ", 
+            "wwwwwwwwwww w   ", 
+            "w    wwwwww w   ", 
+            "w ww        w   ", 
+            "w ww ww wwwww   ", 
+            "w ww ww     w   ", 
+            "w ww wwwwww w   ", 
+            "w w    ww w w   ", 
+            "wwwwww ww w w   ", 
+            "w         www   ", 
+            "wwwwwwwwwwwww   "
+        ]
+    ]
+}
