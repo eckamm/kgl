@@ -101,7 +101,7 @@ class TAO:
         
         clrs = itertools.cycle([(50,10,10), (10,10,50), (10,50,10)])
 
-        tiles_items = sorted(self.tm.tiles.items())
+        tiles_items = sorted([(tile_key, tile) for (tile_key, tile) in self.tm.tiles.items() if tile_key != "p"])
 
         ctrl = []
 

@@ -102,8 +102,8 @@ class Buttons:
     commands = (
         "+",
         "-",
-        "prev",
-        "next",
+        "<",
+        ">",
         "add",
         "save",
         "save/quit",
@@ -183,9 +183,9 @@ class Buttons:
             self.em.post(ResizeLevelRequestEvent(0, 0, -1, -1))
         elif retval == "abort":
             self.em.post(QuitEvent())
-        elif retval == "next":
+        elif retval == ">":
             self.em.post(LevelKeyChangeRequestEvent(delta=1))
-        elif retval == "prev":
+        elif retval == "<":
             self.em.post(LevelKeyChangeRequestEvent(delta=-1))
         elif retval == "add":
             self.em.post(LevelManagerAddLevelRequestEvent())

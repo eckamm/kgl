@@ -81,7 +81,7 @@ class TileBoard:
         self.objects = objects
 
 
-    def _mk_tile_surfaces(self):
+    def _old_mk_tile_surfaces(self):
         """
         scale the global tile images for use in this TileBoard
         """
@@ -97,6 +97,19 @@ class TileBoard:
             else:
                 sz = (self.tile_width, self.tile_height+self.layer_offset)
             self.tiles[k] = pygame.transform.scale(self.g.images[k], sz)
+
+    def _mk_tile_surfaces(self):
+        """
+        scale the global tile images for use in this TileBoard
+        """
+        self.tiles = {}
+
+        for tile_key, tile in self.g.tm.tiles.items():
+            if tile_key == "p":
+                sz = (self.player_width, self.player_height)
+            else:
+                sz = (self.tile_width, self.tile_height+self.layer_offset)
+            self.tiles[tile_key] = pygame.transform.scale(tile.img_surf, sz)
 
     def _init_constants(self):
         w, h = self.g.width, self.g.height
@@ -163,13 +176,19 @@ class TileBoard:
                         self.g.surface.blit(tile, (x,y))
 
     def draw(self, ploc):
+        
+        EMPTY_TILE_KEYS = " ."
+
         for tz in range(2):
             for ty in range(self.grid_height):
                 for tx in range(self.grid_width):
                     x, y = self.xform_coord(tx, ty, tz)
                     i = tz*(self.grid_width*self.grid_height) + ty*self.grid_width + tx
                     tile_key = self.data1d[i]
-                    tile = self.tiles.get(tile_key)
+                    if tile_key in EMPTY_TILE_KEYS:
+                        tile = None
+                    else:
+                        tile = self.tiles.get(tile_key)
                     # Draw the tile.
                     if tile is not None:
                         self.g.surface.blit(tile, (x, y))
